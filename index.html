@@ -35,6 +35,10 @@
 
             didFinishLaunch() {
                 this.ajustesDimension();
+
+                $(window).resize(() => {
+                    this.ajustesDimension();
+                })
             }
 
             next() {
