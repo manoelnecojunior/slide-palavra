@@ -90,7 +90,7 @@
 
     <div class="d-flex flex-row align-items-center mb-3 slide-container" :style="width: {@containerWidth}px">
         <i :style="color: {@controlColor}" class="control-side fas fa-arrow-left" @click="preview()"></i>
-        <img :src="{@slideNumber}.PNG" alt="" :style="width: {@slideWidth}px">
+        <img :src="Slide{@slideNumber}.PNG" alt="" :style="width: {@slideWidth}px">
         <i :style="color: {@controlColor}" class="control-side fas fa-arrow-right" @click="next()"></i>
     </div>
 
