@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Pillar Framework -->
+    <script src="https://cdn.geoinova.app/assets/js/jquery.js"></script>
+    <script src="https://cdn.geoinova.app/assets/js/pillar-v11.3.js"></script>
+
+    <!-- Bootstrap Framework -->
+    <script src="./vendor/bootstrap/bootstrap.min.js?beta-germanio"></script>
+    <script src="./vendor/bootstrap/bootstrap.bundle.min.js?beta-germanio"></script>
+    <link rel="stylesheet" href="./vendor/bootstrap/bootstrap.min.css?beta-germanio">
+
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css">
+
+    <script>
+        PiDefine('App', class extends PiApp {
+            slideNumber = 1;
+            slideWidth = 0;
+            containerWidth = 0;
+
+            ajustesDimension() {
+                const w = $(window);
+                const wd = w.width() - 30;
+
+                this.containerWidth = wd;
+                this.slideWidth = wd - 136;
+            }
+
+            didFinishLaunch() {
+                this.ajustesDimension();
+            }
+
+            next() {
+                this.slideNumber++;
+            }
+
+            preview() {
+                this.slideNumber--
+                if (this.slideNumber < 0) {
+                    this.slideNumber = 0;
+                }
+            }
+        });
+    </script>
+
+    <style>
+        .control-side {
+            font-size: 32px;
+            margin: 20px;
+        }
+
+        .slide-container {
+            width: calc(720px + 136px);
+            margin: auto;
+        }
+
+        .slide-container img {
+            width: 720px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="d-flex flex-row align-items-center mb-3 slide-container" :style="width: {@containerWidth}px">
+        <i class="control-side fas fa-arrow-left" @click="preview()"></i>
+        <img :src="{@slideNumber}.png" alt="" :style="width: {@slideWidth}px">
+        <i class="control-side fas fa-arrow-right" @click="next()"></i>
+    </div>
+
+</body>
+
+</html>
