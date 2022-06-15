@@ -24,6 +24,7 @@
             slideNumber = 1;
             slideWidth = 0;
             containerWidth = 0;
+            controlColor = 'black';
 
             ajustesDimension() {
                 const w = $(window);
@@ -40,7 +41,13 @@
                     this.ajustesDimension();
                 });
 
+                document.addEventListener('fullscreenchange', () => {
+                    var full_screen_element = document.fullscreenElement;
 
+                    if (full_screen_element === null) {
+                        this.controlColor = 'black';
+                    }
+                })
             }
 
             next() {
@@ -55,7 +62,8 @@
             }
 
             fullscreen() {
-                document.querySelector(".slide-container").requestFullscreen().then()
+                this.controlColor = 'white';
+                document.querySelector(".slide-container").requestFullscreen();
             }
         });
     </script>
@@ -81,9 +89,9 @@
 <body>
 
     <div class="d-flex flex-row align-items-center mb-3 slide-container" :style="width: {@containerWidth}px">
-        <i class="control-side fas fa-arrow-left" @click="preview()"></i>
+        <i :style="color: {@controlColor}" class="control-side fas fa-arrow-left" @click="preview()"></i>
         <img :src="{@slideNumber}.PNG" alt="" :style="width: {@slideWidth}px">
-        <i class="control-side fas fa-arrow-right" @click="next()"></i>
+        <i :style="color: {@controlColor}" class="control-side fas fa-arrow-right" @click="next()"></i>
     </div>
 
     <button @click="fullscreen()">FullScreen</button>
